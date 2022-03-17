@@ -1,9 +1,11 @@
-console.log('hello world');
+import { testFn } from './test-file';
 
-// Create heading node
-const heading = document.createElement('h1')
-heading.textContent = 'Hello world!'
+window.addEventListener('load', () => {
+  console.log('page loaded');
 
-// Append heading node to the DOM
-const app = document.querySelector('#root')
-app.append(heading)
+  // check imported js
+  setTimeout(() => {
+    console.log('log after 2 seconds:');
+    testFn();
+  }, 2000);
+});
