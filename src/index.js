@@ -1,9 +1,17 @@
-console.log('hello world');
+import '../styles/reset.css';
+import '../styles/global.css';
+import { onSearchSubmit } from './components/search';
 
-// Create heading node
-const heading = document.createElement('h1')
-heading.textContent = 'Hello world!'
 
-// Append heading node to the DOM
-const app = document.querySelector('#root')
-app.append(heading)
+function main() {
+  window.addEventListener('load', () => {
+    const form = document.getElementById('search-form');
+    form.addEventListener('submit', onSearchSubmit);
+  });
+};
+
+// start app
+main();
+
+
+
