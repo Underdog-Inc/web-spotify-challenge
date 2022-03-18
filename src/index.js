@@ -1,10 +1,10 @@
 import { testFn } from './test-file';
-import './styles/reset.css';
-import './styles/global.css';
-import styles from './styles/styles.scss';
+import '../styles/reset.css';
+import '../styles/global.css';
+import styles from '../styles/styles.scss';
+console.log('loaded')
 
 window.addEventListener('load', () => {
-  // check imported js
   setTimeout(() => {
     console.log('log after 2 seconds:');
     testFn();
