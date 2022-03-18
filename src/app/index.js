@@ -1,5 +1,7 @@
 import { testFn } from './test-file';
-import styles from './styles.scss';
+import './styles/reset.css';
+import './styles/global.css';
+import styles from './styles/styles.scss';
 
 window.addEventListener('load', () => {
   // check imported js
