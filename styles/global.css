@@ -1,4 +1,6 @@
 body {
+  width: 100%;
   min-width: 320px;
-  min-height: 100vh;
+  height: 100vh;
+  font-family: 'arial';
 }
