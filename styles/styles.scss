@@ -1,7 +1,3 @@
 .header {
-  color: red;
-
-  & + .content {
-    color: blue;
-  }
+  color: blue;
 }
