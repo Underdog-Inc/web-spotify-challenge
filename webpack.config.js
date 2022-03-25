@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: "development",
@@ -11,11 +12,11 @@ module.exports = {
     filename: '[name].bundle.js',
   },
   plugins: [
+    new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
       title: 'Spotify Challenge',
       template: path.resolve(__dirname, 'index.html'),
       filename: 'index.html',
-      // favicon: 'assets/favicon.ico',
       publicPath: '/'
     }),
   ],
@@ -41,7 +42,12 @@ module.exports = {
               url: false,
             },
           },
-          'sass-loader'],
+          'sass-loader'
+        ],
+      },
+      {
+        test: /\.css$/i,
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
     ],
   }

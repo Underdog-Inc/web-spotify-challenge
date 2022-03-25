@@ -1,14 +1,14 @@
 const express = require('express');
 const path = require('path');
-const getToken = require('./middleware/spotify-auth-token');
-const spotifyProxy = require('./middleware/spotify-proxy');
+const getAuthToken = require('./spotify/get-auth-token');
+const spotifyProxy = require('./spotify/proxy');
 
 const app = express();
 const PORT = 8080;
 
 // TODO: need to handle refresh & add expiresAt to cookie
 // immediately get spotify auth token
-app.use('/', getToken());
+app.use('/', getAuthToken());
 
 // proxy requests from client
 app.use('/spotify', spotifyProxy())

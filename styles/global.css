@@ -1,6 +1,28 @@
 body {
   width: 100%;
   min-width: 320px;
-  height: 100vh;
   font-family: 'arial';
+}
+
+.page {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.header {
+  text-align: center;
+  padding-top: 100px;
+  margin-bottom: 50px;
+  font-size: 40px;
+}
+
+.searchForm {
+  text-align: center;
+  margin-bottom: 100px;
+}
+
+.searchForm input,
+.searchForm select,
+.searchForm option {
+  padding: 10px;
 }

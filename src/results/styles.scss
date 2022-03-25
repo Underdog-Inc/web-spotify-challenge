@@ -1,0 +1,42 @@
+.resultsContainer {
+  display: flex;
+  overflow-x: scroll;
+  padding: 20px 0;
+
+  .itemContainer {
+    margin-right: 20px;
+
+    &:first-of-type {
+      margin-left: 50px;
+    }
+  }
+
+  .metaData {
+    text-align: left;
+  }
+
+  .image {
+    width: 250px;
+    height: 250px;
+  }
+
+  .name {
+    padding-top: 10px;
+    font-size: 20px;
+  }
+
+  .relatedBtn {
+    background-color: transparent;
+    border: none;
+    font-size: 14px;
+    text-align: left;
+    padding: 0;
+    opacity: .8;
+    padding-top: 5px;
+
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+}
