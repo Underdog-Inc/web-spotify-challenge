@@ -1,7 +1,7 @@
-const express = require('express');
-const path = require('path');
-const getAuthToken = require('./spotify/get-auth-token');
-const spotifyProxy = require('./spotify/proxy');
+import express from 'express';
+import path from 'path';
+import getAuthToken from './middleware/get-auth-token';
+import spotifyProxy from './middleware/spotify-proxy';
 
 const app = express();
 const PORT = 8080;

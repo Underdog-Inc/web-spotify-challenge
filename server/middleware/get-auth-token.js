@@ -1,13 +1,18 @@
-const dotenv = require('dotenv');
+require('dotenv').config();
 const fetch = require('cross-fetch');
-dotenv.config();
 
+/**
+ * Spotify requires that we use a bearer token to run anonymous request.
+ * This function gets that token and stores it in our browser cookies.
+ * Cookie: spotify_access_token
+ */
 const getToken = () => (_request, response, next) => {
-  const spotifyEndpoint = 'https://accounts.spotify.com/api/token';
-  const credentials = `${process.env.CLIENT_ID}:${process.env.CLIENT_SECRET}`;
+  const { SPOTIFY_AUTH_ENDPOINT, CLIENT_ID, CLIENT_SECRET } = process.env;
+
+  const credentials = `${CLIENT_ID}:${CLIENT_SECRET}`;
   const credentialsBase64 = new Buffer.from(credentials).toString('base64');
 
-  fetch(spotifyEndpoint, {
+  fetch(SPOTIFY_AUTH_ENDPOINT, {
     method: 'POST',
     body: 'grant_type=client_credentials',
     headers: {

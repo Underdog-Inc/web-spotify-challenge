@@ -1,4 +1,9 @@
-import { fetchData } from '../results';
+import { fetchData } from '../../utilities';
+
+/**
+ * This file holds all of methods to create our search ui.
+ * Feel like it should have been a class too....?
+ */
 
 export const onSearchSubmit = (e) => {
   e.preventDefault();
