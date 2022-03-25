@@ -1,6 +1,10 @@
 require('dotenv').config();
 const fetch = require('cross-fetch');
 
+/**
+ * Intercept all spotify web api requests and add headers.
+ * No real reason to proxy this, we can hit this API from the browser.
+ */
 const spotifyProxy = () => (proxyRequest, proxyResponse) => {
   // spotify bearer token
   const cookieList = proxyRequest?.headers.cookie.split(';');
