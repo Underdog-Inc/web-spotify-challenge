@@ -5,24 +5,66 @@ body {
 }
 
 .page {
-  margin: 0 auto;
-  width: 100%;
-}
-
-.header {
-  text-align: center;
-  padding-top: 100px;
-  margin-bottom: 50px;
-  font-size: 40px;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 40px 0 40px;
 }
 
 .searchForm {
-  text-align: center;
-  margin-bottom: 100px;
+  margin-top: 20px;
+  margin-bottom: 40px;
 }
 
-.searchForm input,
-.searchForm select,
-.searchForm option {
+.search-input {
+  grid-column: 1 / 6;
+  display: flex;
+  padding: 5px 0;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  align-self: center;
+  margin-right: 10px;
+  margin-bottom: -5px;
+  padding-bottom: 5px;
+}
+
+.search-input input {
+  width: 100%;
+  font-size: 35px;
+  border: none;
+  border-bottom: 2px solid black;
+}
+
+.search-input input:focus {
+  outline: none;
+}
+
+.searchForm input[type="submit"] {
   padding: 10px;
+  grid-column: 6 / 7;
+}
+
+
+
+@media screen and (min-width: 800px) {
+  .page {
+    padding: 100px 100px 0 100px;
+  }
+
+  .search-input input {
+    border-bottom: 5px solid black;
+    font-size: 50px;
+  }
+
+  .searchForm {
+    margin-bottom: 50px;
+  }
+
+  .logo {
+    width: 60px;
+    height: 60px;
+    margin-right: 20px;
+  }
 }

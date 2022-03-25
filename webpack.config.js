@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   mode: "development",
@@ -17,7 +18,13 @@ module.exports = {
       title: 'Spotify Challenge',
       template: path.resolve(__dirname, 'index.html'),
       filename: 'index.html',
+      favicon: './assets/favicon.ico',
       publicPath: '/'
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: "assets/spotify-logo.svg", to: "assets" },
+      ],
     }),
   ],
   module: {
@@ -44,6 +51,11 @@ module.exports = {
           },
           'sass-loader'
         ],
+      },
+      {
+        test: /\.(png|svg)$/,
+        exclude: /node_modules/,
+        loader: 'file-loader'
       },
       {
         test: /\.css$/i,

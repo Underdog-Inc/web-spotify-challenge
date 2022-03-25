@@ -11,21 +11,18 @@
   <body>
     <div id="root">
       <div id="page" class="page">
-        <h1 class="header">Spotify Search</h1>
         <form id="search-form" class="searchForm">
-          <select name="type" id="filter-type">
-            <!-- <option value="album">Album</option> -->
-            <option value="artist">Artist</option>
-            <!-- <option value="track">Track</option> -->
-          </select>
-          <label for="search-input">
+          <label class="search-input" for="search-input">
+            <img
+              class="logo"
+              src="assets/spotify-logo.svg"
+            />
             <input
               id="search-input"
               type="text"
-              placeholder="Search for music"
+              placeholder="Search for an artist"
             />
           </label>
-          <input id="submit-btn" type="submit" />
         </form>
       </div>
     </div>

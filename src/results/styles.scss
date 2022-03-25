@@ -1,14 +1,14 @@
 .resultsContainer {
-  display: flex;
-  overflow-x: scroll;
-  padding: 20px 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+
+  @media screen and (min-width: 800px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
 
   .itemContainer {
-    margin-right: 20px;
-
-    &:first-of-type {
-      margin-left: 50px;
-    }
+    display: grid;
   }
 
   .metaData {
@@ -16,8 +16,8 @@
   }
 
   .image {
-    width: 250px;
-    height: 250px;
+    width: 100%;
+    object-fit: cover;
   }
 
   .name {
