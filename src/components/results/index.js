@@ -6,12 +6,11 @@ import { fetchData } from '../../utilities';
  * Feel like it should have been a class....?
  */
 
-export const buildAndRenderResults = (data) => {
-  console.log(data);
+export const buildAndRenderResults = (resultsList) => {
   clearArtists();
   hideEmptyState();
 
-  const resultContainerWithEls = data.reduce((resultsContainerEl, result) => {
+  const resultContainerWithEls = resultsList.reduce((resultsContainerEl, result) => {
     const resultEl = createResultEl(result);
     if (resultEl) resultsContainerEl.appendChild(resultEl);
     return resultsContainerEl;
@@ -71,11 +70,13 @@ const createMetadataNameEl = (result) => {
 }
 
 const createMetaDataRelatedEl = (result) => {
-  const url = `/spotify/artists/${result.id}/related-artists`
   const relatedEl = document.createElement('button');
   relatedEl.innerText = 'See related artists';
   relatedEl.setAttribute('class', styles.relatedBtn);
+
+  const url = `/spotify/artists/${result.id}/related-artists`
   relatedEl.addEventListener('click', () => fetchData(url));
+
   return relatedEl;
 }
 

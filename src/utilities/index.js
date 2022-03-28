@@ -6,7 +6,7 @@ export const fetchData = (url) => {
     .then(res => res.json())
     .then(res => {
       const data = res?.artists?.items || res?.artists;
-      if (data.length) {
+      if (data?.length) {
         return buildAndRenderResults(data);
       } else {
         return showEmptyState()

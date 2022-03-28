@@ -2,7 +2,7 @@ require('dotenv').config();
 const fetch = require('cross-fetch');
 
 /**
- * Spotify requires that we use a bearer token to run anonymous request.
+ * Spotify requires that we use a bearer token to run anonymous requests.
  * This function gets that token and stores it in our browser cookies.
  * Cookie: spotify_access_token
  */
