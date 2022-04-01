@@ -4,7 +4,7 @@ import getAuthToken from './middleware/get-auth-token';
 import spotifyProxy from './middleware/spotify-proxy';
 
 const app = express();
-const PORT = 8080;
+const PORT = 8081;
 
 // TODO: need to handle refresh & add expiresAt to cookie
 // immediately get spotify auth token
