@@ -1,12 +1,12 @@
 const searchArtist = (val) => {
   const url = `/spotify/search?q=${val}&type=artist`;
   return fetchData(url);
-}
+};
 
 const getRelatedArtists = (artistId) => {
   const url = `/spotify/artists/${artistId}/related-artists`;
   return fetchData(url);
-}
+};
 
 const fetchData = (url) => {
   return fetch(url)
@@ -21,4 +21,4 @@ const fetchData = (url) => {
 export const api = {
   searchArtist,
   getRelatedArtists,
-}
+};

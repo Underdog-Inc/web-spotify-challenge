@@ -6,19 +6,16 @@ import spotifyProxy from './middleware/spotify-proxy';
 const app = express();
 const PORT = 8080;
 
-// TODO: need to handle refresh & add expiresAt to cookie
-// immediately get spotify auth token
+// immediately get spotify bearer token
 app.use('/', getAuthToken());
 
 // proxy requests from client
-app.use('/spotify', spotifyProxy())
+app.use('/spotify', spotifyProxy());
 
 // public folder
 app.use(express.static('dist'));
 
-// think this is serving our html file from the dist folder
-// honestly not sure, should probably figure this out
-app.get('*', (req, res) => {
+app.get('*', (_req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 

@@ -4,6 +4,7 @@ const fetch = require('cross-fetch');
 /**
  * Intercept all spotify web api requests and add headers.
  * No real reason to proxy this, we can hit this API from the browser.
+ * Here because we need to pass the auth token in.
  */
 const spotifyProxy = () => (proxyRequest, proxyResponse) => {
   // spotify bearer token
@@ -18,12 +19,12 @@ const spotifyProxy = () => (proxyRequest, proxyResponse) => {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${spotifyAccessToken}`
+      'Authorization': `Bearer ${spotifyAccessToken}`,
     }
   })
   .then(res => res.json())
   .then(res => proxyResponse.json(res))
-  .catch(err => err)
-}
+  .catch(err => console.log(`[REQUEST ERROR]: ${err}`));
+};
 
 module.exports = spotifyProxy;

@@ -7,7 +7,11 @@ const fetch = require('cross-fetch');
  * Cookie: spotify_access_token
  */
 const getToken = () => (_request, response, next) => {
-  const { SPOTIFY_AUTH_ENDPOINT, CLIENT_ID, CLIENT_SECRET } = process.env;
+  const {
+    SPOTIFY_AUTH_ENDPOINT,
+    CLIENT_ID,
+    CLIENT_SECRET,
+  } = process.env;
 
   const credentials = `${CLIENT_ID}:${CLIENT_SECRET}`;
   const credentialsBase64 = new Buffer.from(credentials).toString('base64');
@@ -22,8 +26,8 @@ const getToken = () => (_request, response, next) => {
   })
   .then(res => res.json())
   .then(res => {
-    // set token in cookies
-    // TO DO: need to expire this properly
+    // TODO: need to set the 60 min cookie expiration
+    // currently you can get a new one on refresh
     response.cookie(
       'spotify_access_token',
       res.access_token,
@@ -33,8 +37,8 @@ const getToken = () => (_request, response, next) => {
     return next();
   })
   .catch(err => {
-    console.log('ERROR:', err)
+    console.log('[AUTH ERROR]:', err)
   });
-}
+};
 
 module.exports = getToken;

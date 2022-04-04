@@ -5,33 +5,32 @@ import { api } from '../../services/api';
 //  PUBLIC
 //
 export const loadResults = (resultsList) => {
-
-  if (!resultsList) return clearResults();
+  if (!resultsList.length) {
+    clearArtists();
+    showEmptyState();
+    return null;
+  }
 
   clearArtists();
   hideEmptyState();
 
   const resultContainerWithEls = buildResultEls(resultsList);
-
   const pageEl = document.getElementById('page');
   pageEl.appendChild(resultContainerWithEls);
 };
 
+
 //
 //  METHODS
 //
-const clearResults = () => {
-  // remove results UI
-  clearArtists();
-
-  // show empty state
-  const emptyState = document.getElementById('empty-state');
-  emptyState.classList.remove('hidden');
-}
-
 const hideEmptyState = () => {
   const emptyState = document.getElementById('empty-state');
-  emptyState.classList.add('hidden')
+  emptyState.classList.add('hidden');
+};
+
+const showEmptyState = () => {
+  const emptyState = document.getElementById('empty-state');
+  emptyState.classList.remove('hidden');
 }
 
 const clearArtists = () => {
@@ -39,10 +38,10 @@ const clearArtists = () => {
   if (resultsContainer) {
     resultsContainer.remove();
   }
-}
+};
 
 const createResultEl = (result) => {
-  if (!result?.images?.length) return null;
+  if (!result.images?.length) return null;
 
   const imageEl = createImageEl(result);
   const metaDataEl = createMetadataContainerEl(result);
@@ -51,7 +50,7 @@ const createResultEl = (result) => {
   resultItemEl.setAttribute('class', styles.itemContainer);
 
   resultItemEl.appendChild(imageEl);
-  resultItemEl.appendChild(metaDataEl)
+  resultItemEl.appendChild(metaDataEl);
   return resultItemEl;
 };
 
@@ -79,23 +78,26 @@ const createMetadataContainerEl = (result) => {
 const createMetadataNameEl = (result) => {
   const nameEl = document.createElement('p');
   nameEl.innerText = result.name;
-  nameEl.setAttribute('class', styles.name)
+  nameEl.setAttribute('class', styles.name);
   return nameEl;
-}
+};
 
 const createMetaDataRelatedEl = (result) => {
   const relatedEl = document.createElement('button');
   relatedEl.innerText = 'See related artists';
   relatedEl.setAttribute('class', styles.relatedBtn);
 
-  relatedEl.addEventListener('click', 
-    () => api.getRelatedArtists(result.id).then(results => {
-      loadResults(results)
-    })
+  relatedEl.addEventListener('click', () => {
+    api.getRelatedArtists(result.id)
+      .then(results => {
+        loadResults(results)
+      })
+      .catch(err => console.log(err));
+    }
   );
 
   return relatedEl;
-}
+};
 
 const buildResultEls = (resultsList) => {
   const resultsContainerEl = document.createElement('ul');
@@ -107,4 +109,4 @@ const buildResultEls = (resultsList) => {
     if (resultEl) resultsContainerEl.appendChild(resultEl);
     return resultsContainerEl;
   }, resultsContainerEl);
-}
+};

@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build:dev": "webpack --watch",
-    "start:dev": "webpack --config webpack.server.config.js && node ./dist/server.bundle.js",
-    "dev": "webpack serve"
+    "start:dev": "webpack --config webpack.server.config.js && node ./dist/server.bundle.js"
   },
   "author": "",
   "license": "ISC",

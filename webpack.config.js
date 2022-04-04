@@ -15,15 +15,15 @@ module.exports = {
   plugins: [
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Spotify Challenge',
-      template: path.resolve(__dirname, 'index.html'),
+      title: 'UD Spotify Challenge',
+      template: path.resolve(__dirname, 'public', 'index.html'),
       filename: 'index.html',
-      favicon: './assets/favicon.ico',
-      publicPath: '/'
+      favicon: './public/assets/favicon.ico',
+      publicPath: '/',
     }),
     new CopyPlugin({
       patterns: [
-        { from: "assets/spotify-logo.svg", to: "assets" },
+        { from: "public/assets/spotify-logo.svg", to: "assets" },
       ],
     }),
   ],
@@ -35,7 +35,7 @@ module.exports = {
         use: ['babel-loader'],
       },
       {
-        test: /\.(scss|css)$/,
+        test: /\.(scss)$/,
         exclude: /node_modules/,
         use: [
           'style-loader',
@@ -53,9 +53,9 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png|svg)$/,
+        test: /\.(svg)$/,
         exclude: /node_modules/,
-        loader: 'file-loader'
+        loader: 'file-loader',
       },
       {
         test: /\.css$/i,
