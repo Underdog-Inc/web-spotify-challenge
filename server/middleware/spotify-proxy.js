@@ -6,9 +6,6 @@ const fetch = require('cross-fetch');
  * No real reason to proxy this, we can hit this API from the browser.
  */
 const spotifyProxy = () => (proxyRequest, proxyResponse) => {
-
-  console.log(proxyResponse)
-
   // spotify bearer token
   const cookieList = proxyRequest?.headers.cookie.split(';');
   const spotifyCookieIndex = cookieList.findIndex(cN => cN.match(/spotify_access_token=/g));
