@@ -1,31 +1,45 @@
 import styles from './styles.scss';
-import { fetchData } from '../../utilities';
+import { api } from '../../services/api';
 
-/**
- * This file holds all of methods to create our results / empty state ui.
- * Feel like it should have been a class....?
- */
+//
+//  PUBLIC
+//
+export const loadResults = (resultsList) => {
 
-export const buildAndRenderResults = (resultsList) => {
+  if (!resultsList) return clearResults();
+
   clearArtists();
   hideEmptyState();
 
-  const resultContainerWithEls = resultsList.reduce((resultsContainerEl, result) => {
-    const resultEl = createResultEl(result);
-    if (resultEl) resultsContainerEl.appendChild(resultEl);
-    return resultsContainerEl;
-  }, createResultsContainer());
+  const resultContainerWithEls = buildResultEls(resultsList);
 
   const pageEl = document.getElementById('page');
   pageEl.appendChild(resultContainerWithEls);
 };
 
-const createResultsContainer = () => {
-  const resultsContainerEl = document.createElement('ul');
-  resultsContainerEl.setAttribute('id', 'results-container');
-  resultsContainerEl.setAttribute('class', styles.resultsContainer);
-  return resultsContainerEl;
-};
+//
+//  METHODS
+//
+const clearResults = () => {
+  // remove results UI
+  clearArtists();
+
+  // show empty state
+  const emptyState = document.getElementById('empty-state');
+  emptyState.classList.remove('hidden');
+}
+
+const hideEmptyState = () => {
+  const emptyState = document.getElementById('empty-state');
+  emptyState.classList.add('hidden')
+}
+
+const clearArtists = () => {
+  const resultsContainer = document.getElementById('results-container');
+  if (resultsContainer) {
+    resultsContainer.remove();
+  }
+}
 
 const createResultEl = (result) => {
   if (!result?.images?.length) return null;
@@ -74,26 +88,23 @@ const createMetaDataRelatedEl = (result) => {
   relatedEl.innerText = 'See related artists';
   relatedEl.setAttribute('class', styles.relatedBtn);
 
-  const url = `/spotify/artists/${result.id}/related-artists`
-  relatedEl.addEventListener('click', () => fetchData(url));
+  relatedEl.addEventListener('click', 
+    () => api.getRelatedArtists(result.id).then(results => {
+      loadResults(results)
+    })
+  );
 
   return relatedEl;
 }
 
-export const clearArtists = () => {
-  const resultsContainer = document.getElementById('results-container');
-  if (resultsContainer) {
-    resultsContainer.remove();
-  }
-};
+const buildResultEls = (resultsList) => {
+  const resultsContainerEl = document.createElement('ul');
+  resultsContainerEl.setAttribute('id', 'results-container');
+  resultsContainerEl.setAttribute('class', styles.resultsContainer);
 
-export const showEmptyState = () => {
-  const emptyState = document.getElementById('empty-state');
-  emptyState.classList.remove('hidden')
-  clearArtists();
-}
-
-export const hideEmptyState = () => {
-  const emptyState = document.getElementById('empty-state');
-  emptyState.classList.add('hidden')
+  return resultsList.reduce((resultsContainerEl, result) => {
+    const resultEl = createResultEl(result);
+    if (resultEl) resultsContainerEl.appendChild(resultEl);
+    return resultsContainerEl;
+  }, resultsContainerEl);
 }
