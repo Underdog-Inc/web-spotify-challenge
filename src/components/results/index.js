@@ -1,5 +1,5 @@
 import styles from './styles.scss';
-import { fetchData } from '../../utilities';
+import { api } from '../../services/api';
 
 //
 //  PUBLIC
@@ -11,7 +11,6 @@ export const loadResults = (resultsList) => {
     return null;
   }
 
-export const buildAndRenderResults = (resultsList) => {
   clearArtists();
   hideEmptyState();
 
@@ -100,12 +99,10 @@ const createMetaDataRelatedEl = (result) => {
   return relatedEl;
 };
 
-export const clearArtists = () => {
-  const resultsContainer = document.getElementById('results-container');
-  if (resultsContainer) {
-    resultsContainer.remove();
-  }
-};
+const buildResultEls = (resultsList) => {
+  const resultsContainerEl = document.createElement('ul');
+  resultsContainerEl.setAttribute('id', 'results-container');
+  resultsContainerEl.setAttribute('class', styles.resultsContainer);
 
   return resultsList.reduce((resultsContainerEl, result) => {
     const resultEl = createResultEl(result);
